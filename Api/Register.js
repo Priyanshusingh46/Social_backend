@@ -7,8 +7,9 @@ const path = require("path");
 
 app.use("/files", express.static(path.join(process.cwd(), "./files")))
 
-const multer = require("multer");
 
+/* Setting the multer configuration*/
+const multer = require("multer");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const destinationDir = path.join(process.cwd(), "./files");
@@ -23,8 +24,9 @@ const storage = multer.diskStorage({
     cb(null, fileNam);
   },
 });
-
 const upload = multer({ storage });
+
+/* Email verification function Sending email */
 
 function emailVerification(otp, roll, name) {
   let email = roll.toString();
@@ -33,7 +35,7 @@ function emailVerification(otp, roll, name) {
 
   try {
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: "smtp.gmail.com",// Configure your gmail by clicking on managing -> security and app 
       port: 587,
       secure: false,
       requireTls: true,
@@ -67,7 +69,9 @@ function emailVerification(otp, roll, name) {
   }
 }
 
-// upload.single("file") ->  ismai file frontend wala hai
+// upload.single("file") ->  ismai file frontend wala hai not conform
+
+/* Post request for register */
 const register = app.post(
   "/register",
   upload.single("file"),
