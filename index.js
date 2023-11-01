@@ -14,6 +14,9 @@ app.use(registerAPI);
 const OtpVerificationAPI = require("./Api/OtpVerification.js");
 app.use(OtpVerificationAPI);
 
+const loginAPI = require("./Api/Login.js");
+app.use(loginAPI);
+
 app.listen(3001, (req,res)=>{
     console.log("listining on port 3001");
 })

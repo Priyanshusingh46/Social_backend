@@ -4,9 +4,9 @@ const user = require("../Modules/User.js");
 const otp = require("../Modules/OtpVerification.js");
 const nodemailer = require("nodemailer");
 const path = require("path");
+const bcrypt = require("bcrypt");
 
-app.use("/files", express.static(path.join(process.cwd(), "./files")))
-
+app.use("/files", express.static(path.join(process.cwd(), "./files")));
 
 /* Setting the multer configuration*/
 const multer = require("multer");
@@ -35,7 +35,7 @@ function emailVerification(otp, roll, name) {
 
   try {
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",// Configure your gmail by clicking on managing -> security and app 
+      host: "smtp.gmail.com", // Configure your gmail by clicking on managing -> security and app
       port: 587,
       secure: false,
       requireTls: true,
@@ -78,10 +78,14 @@ const register = app.post(
   async (req, res) => {
     console.log(req.body);
     console.log(req.fileId);
+
+    let newpassword = req.body.password;
+    const hashPassword = await bcrypt.hash(req.body.password, 10);
+    console.log("jii", hashPassword);
     let users = new user({
       name: req.body.name,
       roll: req.body.roll,
-      password: req.body.password,
+      password: hashPassword,
       profilpic: req.fileId,
       isvalid: false,
     });
