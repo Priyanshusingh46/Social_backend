@@ -17,6 +17,12 @@ app.use(OtpVerificationAPI);
 const loginAPI = require("./Api/Login.js");
 app.use(loginAPI);
 
+const forgetAPI = require("./Api/Forgetpassword.js");
+app.use(forgetAPI);
+
+const NewPasswordAPI = require("./Api/newotpVerification.js");
+app.use( NewPasswordAPI);
+
 app.listen(3001, (req,res)=>{
     console.log("listining on port 3001");
 })
