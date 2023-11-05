@@ -1,11 +1,13 @@
 const express = require("express");
-const cors = require('cors');
+const dotenv = require("dotenv");
+const cors = require("cors");
+dotenv.config();
 require("./Connection/conn.js");
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.get("/", (req,res)=>{
-    res.send("listining");
+app.get("/", (req, res) => {
+  res.send("listining");
 });
 
 const registerAPI = require("./Api/Register.js");
@@ -21,8 +23,8 @@ const forgetAPI = require("./Api/Forgetpassword.js");
 app.use(forgetAPI);
 
 const NewPasswordAPI = require("./Api/newotpVerification.js");
-app.use( NewPasswordAPI);
+app.use(NewPasswordAPI);
 
-app.listen(3001, (req,res)=>{
-    console.log("listining on port 3001");
-})
+app.listen(3001, (req, res) => {
+  console.log("listining on port 3001");
+});
