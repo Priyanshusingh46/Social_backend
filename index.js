@@ -25,6 +25,10 @@ app.use(forgetAPI);
 const NewPasswordAPI = require("./Api/newotpVerification.js");
 app.use(NewPasswordAPI);
 
+
+const tokenverificationAPI = require("./Api/tokenverification.js");
+app.use(tokenverificationAPI);
+
 app.listen(3001, (req, res) => {
   console.log("listining on port 3001");
 });
